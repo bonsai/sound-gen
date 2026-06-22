@@ -1,0 +1,39 @@
+{
+  "created": "2026-06-22",
+  "updated": "2026-06-22",
+  "series": [
+    {
+      "id": "qiita-post",
+      "dir": "articles/qiita-post",
+      "title": "post-qiita：CLI投稿ツールの作り方",
+      "article_count": 8,
+      "status": "published",
+      "published_count": 8,
+      "tags": ["Qiita", "Node.js", "CLI", "親子対話"]
+    },
+    {
+      "id": "godot-pwa",
+      "dir": "articles/godot-pwa",
+      "title": "GodotでPWAを作れるぞ",
+      "article_count": 8,
+      "status": "unscheduled",
+      "published_count": 0,
+      "tags": ["Godot", "PWA", "ゲーム開発", "親子対話"]
+    },
+    {
+      "id": "speech-ai",
+      "dir": "articles/speech-ai",
+      "title": "親子対話：音声AIを料理で理解する",
+      "article_count": 43,
+      "status": "scheduling",
+      "published_count": 0,
+      "tags": ["音声AI", "親子対話", "深層学習", "機械学習"]
+    }
+  ],
+  "pending_series": [
+    {
+      "title": "（次のテーマを記入）",
+      "note": "未定"
+    }
+  ]
+}

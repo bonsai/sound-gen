@@ -1,22 +1,36 @@
-# Sound Gen — AudioGen vs MusicGen
+# bonsai/sound-gen
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colab_audiogen_musicgen.ipynb)
+音声AI × Qiita記事 のための統合パイプライン。
 
-Meta AudioCraft の **AudioGen**（環境音）と **MusicGen**（音楽）で同じプロンプトを30秒生成して聴き比べる Colab ノートブック。
+## 構成
 
-## 使い方
+| Path | 内容 |
+|------|------|
+| `articles/` | 親子対話シリーズ 元記事 (43篇) |
+| `pipeline/` | Qiita投稿パイプライン (schedule/publish) |
+| `seed/` | ネタ生成 (既存記事→次のテーマ) |
+| `qiita.sqlite` | 全記事・シード管理DB |
 
-1. `colab_audiogen_musicgen.ipynb` を Google Colab で開く
-2. Runtime > Run all
-3. 生成された WAV を聴いて比較・ダウンロード
+## 3シリーズ
 
-## モデル
+| シリーズ | 記事数 | 状態 |
+|---------|-------|------|
+| 音声AIを料理で理解する | 43 | 📅 投稿予定 |
+| GodotでPWAを作れるぞ | 8 | ⬜ 未投稿 |
+| post-qiita CLIツール解説 | 8 | ✅ 公開済み |
 
-| モデル | 対象 | パラメータ |
-|--------|------|-----------|
-| `facebook/audiogen-medium` | 環境音（効果音など） | 1.5B |
-| `facebook/musicgen-medium` | 音楽（BGM・曲） | 1.5B |
+## ワークフロー
 
-## 要件
+```bash
+# 既存記事から次のネタを生成
+node seed/generate.mjs
 
-- GPU T4 以上（VRAM ~16GB 推奨）
+# スケジュール登録
+node pipeline/schedule.mjs add 親子対話：Attention
+
+# 投稿
+node pipeline/publish-scheduled.mjs
+
+# DB確認
+sqlite3 qiita.sqlite "SELECT title, status FROM articles"
+```
