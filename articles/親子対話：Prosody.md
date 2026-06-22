@@ -41,4 +41,4 @@
 娘「言えてる！AIが『香り』を理解し始めた——それが今の最前線だね😊」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_Prosody.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_prosody.ipynb)

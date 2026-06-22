@@ -33,4 +33,4 @@
 娘：「そういう時代だね😎 人間の耳を完全に再現するAIはまだ遠いけど、**自動MOS予測の進化で研究のスピードは確実に上がってる**——それだけで十分価値があるよ」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_MOS.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_mos.ipynb)

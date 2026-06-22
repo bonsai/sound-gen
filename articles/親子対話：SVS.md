@@ -29,4 +29,4 @@
 娘：「そういうこと😉 SVCと対になってるんだけど、**SVSは『ゼロから歌を作る』、SVCは『歌ってる声の質を変える』**——料理で言えば**SVSは一から調理、SVCは味変え**😎」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_SVS.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_svs.ipynb)

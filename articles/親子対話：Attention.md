@@ -21,4 +21,4 @@
 娘：「大正解😊 そして音声AIの世界では、**Attentionの効率化**が常に研究テーマ。標準はO(n²)だけど、**Linformer（線形Attention）やFlashAttention**で高速化が進んでる」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_Attention.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_attention.ipynb)

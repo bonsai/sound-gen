@@ -25,4 +25,4 @@
 娘：「そういうこと😊 でも**音声基盤モデルという概念そのものは定着した**。今では各社が『音声のGPT』を目指して競争してる——**VoiceBoxが開けた扉は確実に大きい**よ」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_VoiceBox.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_voicebox.ipynb)

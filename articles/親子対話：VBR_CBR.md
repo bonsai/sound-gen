@@ -27,4 +27,4 @@
 父：「なるほど。通信でもAIでも、無駄を省くのが一番の近道ってわけか」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_VBR_CBR.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_vbr_cbr.ipynb)

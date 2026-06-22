@@ -29,4 +29,4 @@
 娘：「**すでになりつつある**。音声特化のDiTも出始めてて、U-Net時代の終わりは近い😎 まさに**拡散モデルの進化の最終形態**の一つだよ」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_DiT.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_dit.ipynb)

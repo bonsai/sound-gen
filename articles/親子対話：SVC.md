@@ -29,4 +29,4 @@
 娘：「うん。でも技術としての面白さは間違いない。SVSが『レシピから作る』、SVCが『出来た料理の味を変える』——**歌声AIの両輪**って感じ😉」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_SVC.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_svc.ipynb)

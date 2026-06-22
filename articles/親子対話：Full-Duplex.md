@@ -37,5 +37,5 @@
 娘「そういうこと😎 料理できるAI、実用化目前だよ」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_親子対話_FullDuplex.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_full_duplex.ipynb)
 

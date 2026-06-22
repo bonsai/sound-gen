@@ -14,11 +14,35 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ARTICLES_DIR = resolve(__dirname, '..', 'articles');
 const COLABS_DIR = resolve(__dirname, '..', 'colabs');
 
+const NAME_MAP = {
+  'Attention': 'attention', 'CAVLS': 'cavls', 'CLAP': 'clap',
+  'ConsistencyModel': 'consistency_model', 'DAC': 'dac',
+  'Decoder': 'decoder', 'DiT': 'dit', 'Encoder': 'encoder',
+  'Full-Duplex': 'full_duplex', 'LEAF': 'leaf', 'MeanFlow': 'meanflow',
+  'MOS': 'mos', 'Moshi_KAME': 'moshi_kame', 'NeuralSVB': 'neural_svb',
+  'Prosody': 'prosody', 'S2S生成': 's2s_gen', 'S3R': 's3r',
+  'SpeechLM': 'speechlm', 'SSM': 'ssm', 'SUPERB': 'superb',
+  'SVC': 'svc', 'SVS': 'svs', 'Transformer': 'transformer',
+  'TTS': 'tts', 'VAD': 'vad', 'VAP': 'vap', 'VBR_CBR': 'vbr_cbr',
+  'VoiceBox': 'voicebox', 'VRVQ': 'vrvq', 'Warmup': 'warmup',
+  'ニューラルオーディオ': 'neural_audio', 'フローマッチング': 'flow_matching',
+  'メルスペクトログラム': 'melspectrogram', '声クローン': 'voice_clone',
+  '環境音生成': 'sound_gen', '環境音生成2': 'sound_gen_2',
+  '環境音生成3': 'sound_gen_3',
+  '画像生成と音声生成の双幅的展開': 'image_audio_evolution',
+  '過剰平滑化': 'over_smoothing', '離散トークン': 'discrete_tokens',
+  '音声コーデック': 'audio_codec', '音声トークン': 'audio_tokens',
+  '音源分離': 'source_separation',
+};
+
 function slugify(name) {
-  return name
-    .replace(/[：:]/g, '_')
-    .replace(/[^a-zA-Z0-9_\u3000-\u9FFF]/g, '')
-    .replace(/\s+/g, '_');
+  const clean = name.replace('親子対話：', '');
+  if (NAME_MAP[clean]) return NAME_MAP[clean];
+  return clean
+    .replace(/[^a-zA-Z0-9_]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '')
+    .toLowerCase();
 }
 
 function main() {

@@ -33,4 +33,4 @@
 娘：「そういう時代だね😎 そして次のステップは**テキストと音声を完全に統一した一つのLM**——境界のない世界がもうすぐそこだよ」
 ---
 
-🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_SpeechLM.ipynb)
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_speechlm.ipynb)
