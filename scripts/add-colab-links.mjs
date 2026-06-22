@@ -14,10 +14,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ARTICLES_DIR = resolve(__dirname, '..', 'articles');
 const COLABS_DIR = resolve(__dirname, '..', 'colabs');
 
-function slugifyColab(name) {
+function slugify(name) {
   return name
     .replace(/[：:]/g, '_')
-    .replace(/[^a-zA-Z0-9_\u3000-\u9FFF\-\. ]/g, '')
+    .replace(/[^a-zA-Z0-9_\u3000-\u9FFF]/g, '')
     .replace(/\s+/g, '_');
 }
 
