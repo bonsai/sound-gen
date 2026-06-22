@@ -1,19 +1,23 @@
 /**
  * publish-scheduled.mjs
- * manifest.json の scheduled から次の記事を Qiita 下書き投稿
+ * manifest.json の scheduled から次の記事を Qiita 下書き投稿 + 更新
  *
  * 使い方:
- *   node scripts/publish-scheduled.mjs              # 次の1件を下書き投稿
- *   node scripts/publish-scheduled.mjs --publish   # 次の1件を公開
- *   node scripts/publish-scheduled.mjs --all        # 全scheduledを一気に投稿
- *   node scripts/publish-scheduled.mjs --slow       # 1件投稿して停止（429対策）
+ *   node pipeline/publish-scheduled.mjs                    # 次の1件を下書き投稿
+ *   node pipeline/publish-scheduled.mjs --publish         # 次の1件を公開
+ *   node pipeline/publish-scheduled.mjs --all              # 全scheduledを一気に投稿
+ *   node pipeline/publish-scheduled.mjs --slow             # 1件投稿して停止（429対策）
+ *   node pipeline/publish-scheduled.mjs --check-updates    # 更新が必要な記事を表示
+ *   node pipeline/publish-scheduled.mjs --update           # 更新があった記事だけPATCH
+ *   node pipeline/publish-scheduled.mjs --update-all       # 全published記事を強制PATCH
  *
  * 事前に schedule.mjs add <name> でスケジュール登録が必要
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { resolve, dirname, basename } from 'path';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
+import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { createHash } from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const MANIFEST_PATH = resolve(__dirname, '..', 'articles', 'manifest.json');
@@ -21,7 +25,6 @@ const ARTICLES_DIR = resolve(__dirname, '..', 'articles');
 const ENV_PATH = resolve(__dirname, '..', '.env.qiita');
 
 function loadEnv() {
-  // Prefer env var (GitHub Actions), fallback to .env.qiita
   if (process.env.QIITA_API_TOKEN) return process.env.QIITA_API_TOKEN;
   if (!existsSync(ENV_PATH)) throw new Error('.env.qiita not found');
   const content = readFileSync(ENV_PATH, 'utf8');
@@ -39,6 +42,10 @@ function loadManifest() {
 function saveManifest(m) {
   m.updated = new Date().toISOString().slice(0, 10);
   writeFileSync(MANIFEST_PATH, JSON.stringify(m, null, 2) + '\n');
+}
+
+function fileHash(md) {
+  return createHash('sha256').update(md, 'utf8').digest('hex').slice(0, 12);
 }
 
 function parseMarkdown(md, filename) {
@@ -93,17 +100,35 @@ async function postToQiita(token, title, body, tags, isDraft = true) {
   return await res.json();
 }
 
+async function patchQiita(token, qiitaId, title, body, tags) {
+  const res = await fetch(`https://qiita.com/api/v2/items/${qiitaId}`, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      title,
+      body,
+      tags: tags.map(t => ({ name: t })),
+    })
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(`Qiita API error (${res.status}): ${err.message || res.statusText}`);
+  }
+  return await res.json();
+}
+
 async function publishOne(token, articleName, manifest, isDraft = true) {
   const filePath = resolve(ARTICLES_DIR, `${articleName}.md`);
   if (!existsSync(filePath)) {
-    console.error(`❌ File not found: ${articleName}.md (broken symlink?)`);
+    console.error(`❌ File not found: ${articleName}.md`);
     return false;
   }
 
   const md = readFileSync(filePath, 'utf8');
   const { title, body, tags } = parseMarkdown(md, articleName);
-
-  // manifest tags を優先、記事のタグを補完、最大5つ
   const allTags = [...new Set([...(manifest.tags || []), ...tags])].slice(0, 5);
 
   console.log(`📝 Posting: "${title}" (${[...body].length} chars)`);
@@ -115,11 +140,12 @@ async function publishOne(token, articleName, manifest, isDraft = true) {
     console.log(`   🔗 ${article.url}`);
     console.log(`   🆔 ${article.id}`);
 
-    // Move from scheduled to published
     manifest.scheduled = manifest.scheduled.filter(s => s !== articleName);
     if (!manifest.published.includes(articleName)) {
       manifest.published.push(articleName);
     }
+    if (!manifest.updated_map) manifest.updated_map = {};
+    manifest.updated_map[articleName] = { hash: fileHash(md), qiita_id: article.id };
     saveManifest(manifest);
     return true;
   } catch (e) {
@@ -129,20 +155,129 @@ async function publishOne(token, articleName, manifest, isDraft = true) {
   }
 }
 
+async function updateOne(token, articleName, manifest) {
+  const map = manifest.updated_map || {};
+  const entry = map[articleName];
+  if (!entry?.qiita_id) {
+    console.log(`   ⏭️  ${articleName}: no Qiita ID (was it published here?)`);
+    return false;
+  }
+
+  const filePath = resolve(ARTICLES_DIR, `${articleName}.md`);
+  if (!existsSync(filePath)) {
+    console.log(`   ⏭️  ${articleName}: file missing`);
+    return false;
+  }
+
+  const md = readFileSync(filePath, 'utf8');
+  const currentHash = fileHash(md);
+  if (currentHash === entry.hash) {
+    console.log(`   ✅ ${articleName}: up to date`);
+    return false;
+  }
+
+  const { title, body, tags } = parseMarkdown(md, articleName);
+  const allTags = [...new Set([...(manifest.tags || []), ...tags])].slice(0, 5);
+
+  console.log(`   📝 Updating: "${title}" (hash ${entry.hash} → ${currentHash})`);
+  process.stdout.write('      🚀 Patching...');
+
+  try {
+    await patchQiita(loadEnv(), entry.qiita_id, title, body, allTags);
+    console.log(' ✅');
+    entry.hash = currentHash;
+    saveManifest(manifest);
+    return true;
+  } catch (e) {
+    console.log(` ❌`);
+    console.error(`      ${e.message}`);
+    return false;
+  }
+}
+
+async function checkUpdates(manifest) {
+  const map = manifest.updated_map || {};
+  const changed = [];
+
+  for (const name of manifest.published) {
+    const entry = map[name];
+    if (!entry?.qiita_id) {
+      changed.push({ name, status: 'no_qiita_id' });
+      continue;
+    }
+    const filePath = resolve(ARTICLES_DIR, `${name}.md`);
+    if (!existsSync(filePath)) {
+      changed.push({ name, status: 'file_missing' });
+      continue;
+    }
+    const md = readFileSync(filePath, 'utf8');
+    const currentHash = fileHash(md);
+    if (currentHash !== entry.hash) {
+      changed.push({ name, status: 'changed', oldHash: entry.hash, newHash: currentHash });
+    }
+  }
+
+  return changed;
+}
+
 async function main() {
   const isAll = process.argv.includes('--all');
   const isSlow = process.argv.includes('--slow');
   const isPublish = process.argv.includes('--publish');
+  const isCheckUpdates = process.argv.includes('--check-updates');
+  const isUpdate = process.argv.includes('--update');
+  const isUpdateAll = process.argv.includes('--update-all');
   const token = loadEnv();
   const manifest = loadManifest();
 
+  // ── Check updates mode ──
+  if (isCheckUpdates) {
+    const changed = await checkUpdates(manifest);
+    if (changed.length === 0) {
+      console.log('✅ All published articles are up to date');
+      return;
+    }
+    console.log(`📋 ${changed.length} article(s) need update:\n`);
+    for (const c of changed) {
+      const statusIcon = c.status === 'changed' ? '🔄' : c.status === 'no_qiita_id' ? '⚠️' : '❌';
+      console.log(`   ${statusIcon} ${c.name} (${c.status})`);
+    }
+    return;
+  }
+
+  // ── Update mode ──
+  if (isUpdate || isUpdateAll) {
+    const changed = isUpdateAll
+      ? manifest.published.map(n => ({ name: n, status: 'force' }))
+      : await checkUpdates(manifest);
+
+    const filtered = changed.filter(c => c.status === 'changed' || c.status === 'force');
+    if (filtered.length === 0) {
+      console.log('✅ No articles need updating');
+      return;
+    }
+
+    console.log(`📋 Updating ${filtered.length} article(s)...\n`);
+    let ok = 0;
+    for (const c of filtered) {
+      const success = await updateOne(token, c.name, manifest);
+      if (success) ok++;
+      if (isSlow) {
+        console.log('   ⏳ Waiting 3s for rate limit...');
+        await new Promise(r => setTimeout(r, 3000));
+      }
+    }
+    console.log(`\n✅ Updated ${ok}/${filtered.length} article(s)`);
+    return;
+  }
+
+  // ── Publish mode ──
   if (manifest.scheduled.length === 0) {
-    console.log('📭 No scheduled articles. Use: node scripts/schedule.mjs add <name>');
+    console.log('📭 No scheduled articles. Use: node pipeline/schedule.mjs add <name>');
     return;
   }
 
   if (isAll) {
-    // Publish all sequentially
     for (const article of [...manifest.scheduled]) {
       const ok = await publishOne(token, article, manifest, !isPublish);
       if (!ok) break;

@@ -2,14 +2,24 @@ name: Qiita Daily Post
 
 on:
   schedule:
-    # 12:00 JST = 03:00 UTC
+    # 12:00 JST = 03:00 UTC — publish next article
     - cron: '0 3 * * *'
-    # 18:00 JST = 09:00 UTC
+    # 18:00 JST = 09:00 UTC — publish next article
     - cron: '0 9 * * *'
   workflow_dispatch:
     inputs:
-      publish:
-        description: '下書きでなく公開する'
+      mode:
+        description: 'モード'
+        required: true
+        default: 'publish'
+        type: choice
+        options:
+          - publish
+          - update
+          - update-all
+          - check-updates
+      publish_direct:
+        description: '公開する（下書きでなく）'
         required: false
         type: boolean
         default: false
@@ -18,7 +28,7 @@ env:
   QIITA_API_TOKEN: ${{ secrets.QIITA_API_TOKEN }}
 
 jobs:
-  publish:
+  run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,15 +39,28 @@ jobs:
         with:
           node-version: 22
 
-      - name: Publish next article (draft)
-        if: github.event_name != 'workflow_dispatch' || !inputs.publish
+      - name: Publish next article (scheduled)
+        if: github.event_name != 'workflow_dispatch'
         run: node pipeline/publish-scheduled.mjs
 
-      - name: Publish next article (public)
-        if: github.event_name == 'workflow_dispatch' && inputs.publish
-        run: node pipeline/publish-scheduled.mjs --publish
+      - name: Workflow dispatch — publish
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'publish'
+        run: node pipeline/publish-scheduled.mjs ${{ inputs.publish_direct == true && '--publish' || '' }}
+
+      - name: Workflow dispatch — update
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'update'
+        run: node pipeline/publish-scheduled.mjs --update --slow
+
+      - name: Workflow dispatch — update-all
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'update-all'
+        run: node pipeline/publish-scheduled.mjs --update-all --slow
+
+      - name: Workflow dispatch — check-updates
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'check-updates'
+        run: node pipeline/publish-scheduled.mjs --check-updates
 
       - name: Commit updated manifest
+        if: github.event_name != 'workflow_dispatch' || inputs.mode != 'check-updates'
         run: |
           git config user.name "qiita-bot"
           git config user.email "qiita-bot@users.noreply.github.com"
