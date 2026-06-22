@@ -14,8 +14,8 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const MANIFEST_PATH = resolve(__dirname, '..', 'articles', 'speech-ai', 'manifest.json');
-const ARTICLES_DIR = resolve(__dirname, '..', 'articles', 'speech-ai');
+const MANIFEST_PATH = resolve(__dirname, '..', 'articles', 'manifest.json');
+const ARTICLES_DIR = resolve(__dirname, '..', 'articles');
 
 function loadManifest() {
   if (!existsSync(MANIFEST_PATH)) return { scheduled: [], published: [], tags: [] };
@@ -50,9 +50,13 @@ function listArticles() {
 function addScheduled(name) {
   const m = loadManifest();
   // Find matching file
-  const files = readdirSync(ARTICLES_DIR).filter(f => f.includes(name) && f.endsWith('.md'));
+  let files = readdirSync(ARTICLES_DIR).filter(f => f.includes(name) && f.endsWith('.md'));
   if (files.length === 0) { console.error(`❌ No article matching "${name}"`); return; }
-  if (files.length > 1) { console.error(`❌ Multiple matches: ${files.join(', ')}`); return; }
+  if (files.length > 1) {
+    const exact = files.find(f => f.replace('.md', '') === name);
+    if (exact) { files = [exact]; }
+    else { console.error(`❌ Multiple matches: ${files.join(', ')}`); return; }
+  }
   const article = files[0].replace('.md', '');
   if (m.published.includes(article)) { console.log(`⏭️ "${article}" already published`); return; }
   if (m.scheduled.includes(article)) { console.log(`⏭️ "${article}" already scheduled`); return; }

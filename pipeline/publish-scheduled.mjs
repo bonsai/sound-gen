@@ -16,11 +16,13 @@ import { resolve, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const MANIFEST_PATH = resolve(__dirname, '..', 'articles', 'speech-ai', 'manifest.json');
-const ARTICLES_DIR = resolve(__dirname, '..', 'articles', 'speech-ai');
+const MANIFEST_PATH = resolve(__dirname, '..', 'articles', 'manifest.json');
+const ARTICLES_DIR = resolve(__dirname, '..', 'articles');
 const ENV_PATH = resolve(__dirname, '..', '.env.qiita');
 
 function loadEnv() {
+  // Prefer env var (GitHub Actions), fallback to .env.qiita
+  if (process.env.QIITA_API_TOKEN) return process.env.QIITA_API_TOKEN;
   if (!existsSync(ENV_PATH)) throw new Error('.env.qiita not found');
   const content = readFileSync(ENV_PATH, 'utf8');
   for (const line of content.split('\n')) {
