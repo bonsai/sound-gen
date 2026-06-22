@@ -23,3 +23,6 @@
 父：「確かに。下ごしらえ（Encoder）が完璧でも、調理（Decoder）を失敗したら台無しだもんな」
 
 娘：「そういう時代だね😎 だから最近は**Decoderの研究もめちゃくちゃ熱い**——ViTやDiTをDecoderに使う流れも出てきてるよ」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_Decoder.ipynb)

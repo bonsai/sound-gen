@@ -31,3 +31,6 @@
 父：「確かに。適材適所で道具を選べるのが一番だな」
 
 娘：「そういう時代だね😎 SSMはまだ歴史が浅いけど、**これからの音声AIの基盤の一角になる**——それは間違いないよ」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_SSM.ipynb)

@@ -27,3 +27,6 @@
 父：「つまり、S2Sは『速い』『カスケードは『賢い』。そしてKAMEは『速くて賢い』を両立した新しい解か」
 
 娘：「そういうこと😎 次回はこのKAMEの仕組みを深掘りするよ——**音声AIの『話しながら考える』時代**、ここから始まる」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_S2S%E7%94%9F%E6%88%90.ipynb)

@@ -23,4 +23,6 @@
 父：「つまり…TTSはもう『完成された技術』で、今は『いかに自然に・いかに少ないデータで』を競ってるのか」
 
 娘：「そういうこと😊 でもまだ課題はある。**感情表現・プロソディーの細かい制御・長文の一貫性**——『ただ読む』はできても『心を込めて読む』はまだ難しい」
+---
 
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_TTS.ipynb)

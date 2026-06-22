@@ -35,3 +35,6 @@
 父「確かに。歌を作って磨く——料理で言うと、**一から調理して盛り付け直す**感じだな」
 
 娘：「そういう時代だね😎 アマチュアの歌声だって、磨けば光る——AIがそれを手伝ってくれるよ」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_NeuralSVB.ipynb)

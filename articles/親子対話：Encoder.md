@@ -41,3 +41,6 @@
 父「結局、一番大事なのは『どう特徴を抽出するか』って話なんだな」
 
 娘「そこが全てだね😉 良いエンコーダーなしに、良い音声AIはありえない——**料理人の腕前は包丁捌きで決まる**ってこと」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_Encoder.ipynb)

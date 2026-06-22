@@ -23,3 +23,6 @@
 父：「なるほど。EnCodecより進んでるけど、Mimi（Kyutai）やSNACなんかも出てきて、コーデック戦国時代って感じだな」
 
 娘：「まさに！DAC, EnCodec, SoundStream, Mimi, SNAC — **コーデック戦国時代の真っただ中**。どれが音声LLMの標準トークナイザーになるかはまだ決着ついてない。DACは **高品質・高圧縮・汎用性の三拍子揃った最右翼** 🔥」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_DAC.ipynb)

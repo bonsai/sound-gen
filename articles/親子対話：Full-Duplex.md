@@ -35,3 +35,7 @@
 父「つまりFull-Duplexは、**一つのコンロで味噌汁と焼き魚を同時に作る『ながら調理』**をAIにやらせる技術ってことか」
 
 娘「そういうこと😎 料理できるAI、実用化目前だよ」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_親子対話_FullDuplex.ipynb)
+

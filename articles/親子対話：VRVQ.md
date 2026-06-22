@@ -23,3 +23,6 @@
 父：「Sonyのコードは公開されてるのか？」
 
 娘：「はい！**SonyResearch/VRVQ** でMITライセンス公開中。**音声AIの効率化は2025年のメイントピック** の一つ。VBR + VFR の両方を組み合わせれば、さらに効率的なコーデックが作れる——**次のフロンティアはその融合** だよ🔥」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_VRVQ.ipynb)

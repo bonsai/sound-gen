@@ -35,3 +35,6 @@
 父：「その発想の転換ってVAPとかエンコーダーの話にも通じるな」
 
 娘：「そう！S3Rが『特徴表現そのもの』を学ぶなら、LEAFは『**特徴表現を作る前処理の道具**』そのものを学ぶ。**『包丁の形』から学び直す**って感じ😉」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_LEAF.ipynb)

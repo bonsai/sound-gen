@@ -39,3 +39,6 @@
 父：「裏のシェフの知識を表の料理人がリアルタイムに取り入れる——まるで料理の世界でもありそうな話だな」
 
 娘：「そういう時代だね😎 そしてこのタンデム方式は、音声対話だけでなく**あらゆるリアルタイムAIの設計思想**になるかもしれない」
+---
+
+🔗 [▶ この記事の内容をColabで動かす](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_%E8%A6%AA%E5%AD%90%E5%AF%BE%E8%A9%B1_Moshi_KAME.ipynb)
