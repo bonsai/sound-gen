@@ -9,7 +9,6 @@
     "機械学習"
   ],
   "scheduled": [
-    "親子対話：CAVLS",
     "親子対話：CLAP",
     "親子対話：ConsistencyModel",
     "親子対話：DAC",
@@ -53,14 +52,19 @@
     "親子対話：環境音生成"
   ],
   "published": [
-    "親子対話：Attention"
+    "親子対話：Attention",
+    "親子対話：CAVLS"
   ],
   "updated_map": {
     "親子対話：Attention": {
       "hash": "8a58b21bcaf6",
       "qiita_id": "ff833158d6df79362342"
+    },
+    "親子対話：CAVLS": {
+      "hash": "a68d59ec41e0",
+      "qiita_id": "0f459f9f4e33a1eb4285"
     }
   },
   "created": "2026-06-22",
-  "updated": "2026-06-22"
+  "updated": "2026-06-25"
 }
