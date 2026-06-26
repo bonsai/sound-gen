@@ -1165,7 +1165,8 @@ plt.show()
 
 print(f"✅ CAVLS: Fixed={len(fixed_segments)} segments, Adaptive={len(adaptive_segments)}")
 print(f"   Saves {abs(len(adaptive_segments)-len(fixed_segments))} segments ({100*abs(len(adaptive_segments)-len(fixed_segments))/len(fixed_segments):.0f}%)")`,
-    title: 'POC: CAVLS'
+    title: 'POC: CAVLS',
+    summary: '### \u2705 CAVLS (Content Adaptive Variable Length Segmentation)\n\n\u2714 \u56FA\u5b9a\u30bb\u30b0\u30e1\u30f3\u30c8\u3068\u9069\u5fdc\u7684\u30bb\u30b0\u30e1\u30f3\u30c8\u3092\u6bd4\u8f03\n\u2714 \u97f3\u58f0\u306e\u8907\u96d1\u3055\u306b\u5fdc\u3058\u3066\u30d5\u30ec\u30fc\u30e0\u9577\u3092\u5909\u66f4\n\n[▶ Colab\u3067\u5b9f\u884c](https://colab.research.google.com/github/bonsai/sound-gen/blob/main/colabs/poc_cavls.ipynb)'
   },
   'DiT': {
     install: '!pip install -q torch numpy matplotlib',
@@ -1522,12 +1523,15 @@ function genNotebook(article, template) {
   const name = article.replace('親子対話：', '').replace('.md', '');
   const title = (template.title || 'POC: {title_short}').replace('{title_short}', name);
 
+  const summary = (template.summary || COLAB_TEMPLATES.default.summary || '')
+    .replace('{article_url}', `https://github.com/bonsai/sound-gen/blob/main/articles/${encodeURIComponent(article)}`);
+
   const cells = [
-    { cell_type: 'markdown', source: [`# ${title}\n\n📖 対応記事: \`${article.replace('.md', '')}\``, '', '🔗 [記事を読む](articles/' + article + ')'] },
+    { cell_type: 'markdown', source: [`# ${title}\n\n📖 対応記事: \`${article.replace('.md', '')}\``, '', `🔗 [記事を読む](https://github.com/bonsai/sound-gen/blob/main/articles/${encodeURIComponent(article)})`] },
     { cell_type: 'code', source: ['# @title Setup\n' + (template.install || '!pip install -q torch numpy matplotlib')] },
     { cell_type: 'code', source: ['# @title Demo\n' + template.code] },
-    { cell_type: 'markdown', source: ['---\n' + template.summary] },
-  ];
+    summary ? { cell_type: 'markdown', source: ['---\n' + summary] } : null,
+  ].filter(Boolean);
 
   return {
     nbformat: 4, nbformat_minor: 0,
