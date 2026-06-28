@@ -9,7 +9,6 @@
     "機械学習"
   ],
   "scheduled": [
-    "親子対話：Full-Duplex",
     "親子対話：LEAF",
     "親子対話：MeanFlow",
     "親子対話：MOS",
@@ -53,7 +52,8 @@
     "親子対話：DAC",
     "親子対話：Decoder",
     "親子対話：DiT",
-    "親子対話：Encoder"
+    "親子対話：Encoder",
+    "親子対話：Full-Duplex"
   ],
   "updated_map": {
     "親子対話：Attention": {
@@ -87,6 +87,10 @@
     "親子対話：Encoder": {
       "hash": "45de79048544",
       "qiita_id": "7ff5e240d6581cf28a9f"
+    },
+    "親子対話：Full-Duplex": {
+      "hash": "31043813eb6c",
+      "qiita_id": "cbcb7078541641a97456"
     }
   },
   "created": "2026-06-22",
