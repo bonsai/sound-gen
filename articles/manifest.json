@@ -9,7 +9,6 @@
     "機械学習"
   ],
   "scheduled": [
-    "親子対話：SpeechLM",
     "親子対話：SSM",
     "親子対話：SUPERB",
     "親子対話：SVC",
@@ -53,7 +52,8 @@
     "親子対話：NeuralSVB",
     "親子対話：Prosody",
     "親子対話：S2S生成",
-    "親子対話：S3R"
+    "親子対話：S3R",
+    "親子対話：SpeechLM"
   ],
   "updated_map": {
     "親子対話：Attention": {
@@ -123,8 +123,12 @@
     "親子対話：S3R": {
       "hash": "ba2279ee3c3e",
       "qiita_id": "0b14a55923123267b93a"
+    },
+    "親子対話：SpeechLM": {
+      "hash": "4e01f7ac4c6d",
+      "qiita_id": "0e24e7521f5cf216d799"
     }
   },
   "created": "2026-06-22",
-  "updated": "2026-07-02"
+  "updated": "2026-07-03"
 }
