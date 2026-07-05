@@ -9,7 +9,6 @@
     "機械学習"
   ],
   "scheduled": [
-    "親子対話：SVS",
     "親子対話：Transformer",
     "親子対話：TTS",
     "親子対話：VAD",
@@ -53,7 +52,8 @@
     "親子対話：SpeechLM",
     "親子対話：SSM",
     "親子対話：SUPERB",
-    "親子対話：SVC"
+    "親子対話：SVC",
+    "親子対話：SVS"
   ],
   "updated_map": {
     "親子対話：Attention": {
@@ -139,8 +139,12 @@
     "親子対話：SVC": {
       "hash": "dc1574078e5a",
       "qiita_id": "186ee629120284782efa"
+    },
+    "親子対話：SVS": {
+      "hash": "f229c3c54a6b",
+      "qiita_id": "4a3963a54cf1d2912d79"
     }
   },
   "created": "2026-06-22",
-  "updated": "2026-07-04"
+  "updated": "2026-07-05"
 }
