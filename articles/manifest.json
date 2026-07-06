@@ -9,7 +9,6 @@
     "機械学習"
   ],
   "scheduled": [
-    "親子対話：VAD",
     "親子対話：VAP",
     "親子対話：VBR_CBR",
     "親子対話：VoiceBox",
@@ -53,7 +52,8 @@
     "親子対話：SVC",
     "親子対話：SVS",
     "親子対話：Transformer",
-    "親子対話：TTS"
+    "親子対話：TTS",
+    "親子対話：VAD"
   ],
   "updated_map": {
     "親子対話：Attention": {
@@ -151,6 +151,10 @@
     "親子対話：TTS": {
       "hash": "e476afdfc26b",
       "qiita_id": "09adff71b4b9588f21fd"
+    },
+    "親子対話：VAD": {
+      "hash": "23a48c27e5cd",
+      "qiita_id": "c77a96d8b7807202ba7a"
     }
   },
   "created": "2026-06-22",
