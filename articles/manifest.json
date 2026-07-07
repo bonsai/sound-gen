@@ -9,7 +9,6 @@
     "機械学習"
   ],
   "scheduled": [
-    "親子対話：VBR_CBR",
     "親子対話：VoiceBox",
     "親子対話：VRVQ",
     "親子対話：Warmup",
@@ -53,7 +52,8 @@
     "親子対話：Transformer",
     "親子対話：TTS",
     "親子対話：VAD",
-    "親子対話：VAP"
+    "親子対話：VAP",
+    "親子対話：VBR_CBR"
   ],
   "updated_map": {
     "親子対話：Attention": {
@@ -159,6 +159,10 @@
     "親子対話：VAP": {
       "hash": "eaa3f8b98216",
       "qiita_id": "b54094bea29d35e1e44b"
+    },
+    "親子対話：VBR_CBR": {
+      "hash": "a21bd5a2480e",
+      "qiita_id": "0fc96ff7cb234817d43d"
     }
   },
   "created": "2026-06-22",
